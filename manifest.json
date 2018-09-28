@@ -1,0 +1,42 @@
+{
+  "name": "Facebook AdBlock",
+  "version": "0.1.1",
+  "author": "Toan Nguyen",
+  "manifest_version": 2,
+  "description": "Hide all ads and hide page suggestions on facebook",
+  "permissions": [
+    "http://www.facebook.com/*",
+    "https://www.facebook.com/*",
+    "https://web.facebook.com/*",
+    "activeTab",
+    "declarativeContent",
+    "storage"
+  ],
+  "web_accessible_resources": [],
+  "icons": {
+    "128": "logo128.png",
+    "16": "logo16.png",
+    "48": "logo48.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "logo128.png",
+      "16": "logo16.png",
+      "48": "logo48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*",
+        "https://web.facebook.com/*"
+      ],
+      "css": ["app.css"],
+      "js": ["arrive.min.js", "app.js"],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}
