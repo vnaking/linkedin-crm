@@ -50,8 +50,8 @@ window.onload = function () {
     document.execCommand('copy');
     document.body.removeChild(el);
   };
-  const splittedName = function (fullName, isFirstNameInTheEnd) {
-    let firstName, lastName;
+  const splittedName = function (fullName) {
+    let fullNameArr, firstName, lastName;
     let temp = {
       firstName: '',
       lastName: ''
@@ -59,39 +59,34 @@ window.onload = function () {
     if (!fullName || !fullName.length) {
       return temp;
     }
-    let fullNameArr = fullName.trim().split(' ');
-    if (isFirstNameInTheEnd) {
-      firstName = fullNameArr[fullNameArr.length - 1];
-      lastName = fullNameArr[0];
-    } else {
-      firstName = fullNameArr[0];
-      lastName = fullNameArr[fullNameArr.length - 1];
-    }
+    fullNameArr = fullName.trim().split(' ');
+    firstName = fullNameArr[0];
+    lastName = fullNameArr[fullNameArr.length - 1];
     temp.firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
     temp.lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
     return temp;
   }
-  /************************************
-   ********* Accept message ********
-   ************************************/
-  const generateBtnCreateAcceptContent = function (text) {
+  const generateBtnCreateAcceptContent = function (btnText, parent) {
     var btn = document.createElement('a');
     btn.classList = 'msg-form__send-button button-primary-small rr-btn-xs';
-    btn.innerText = text;
-    acceptActionsElements = document.querySelector(acceptMsgComposeActions);
-    if (acceptActionsElements) {
-      acceptActionsElements.appendChild(btn);
+    btn.innerText = btnText;
+    if (parent) {
+      parent.appendChild(btn);
     }
     return btn;
   };
-
-  const generateAcceptContent = function (lang, isMr, isFirstNameInTheEnd) {
-    let acceptMsgComposeFullNameEl = document.querySelector(acceptMsgComposeFullName);
-    let acceptMsgComposeInputEl = document.querySelector(acceptMsgComposeInput);
-    let acceptMsgComposeSendBtnEl = document.querySelector(acceptMsgComposeSendBtn);
-    if (!acceptMsgComposeFullNameEl) return;
-    const name = splittedName(acceptMsgComposeFullNameEl.innerText, isFirstNameInTheEnd);
-    chrome.storage.sync.get(['inputWelcomeTemplate'], function (result) {
+  /************************************
+   ********* Accept message ********
+   ************************************/
+  const generateAcceptContent = function (name, lang, isMr, isFirstNameInTheEnd) {
+    if (!name) return;
+    let firstName = name.firstName;
+    let lastName = name.lastName;
+    if (isFirstNameInTheEnd) {
+      firstName = name.lastName;
+      lastName = name.firstName;
+    }
+    return chrome.storage.sync.get(['inputWelcomeTemplate'], function (result) {
       if (!result) {
         chrome.storage.sync.set({
             inputWelcomeTemplate: JSON.stringify(inputWelcomeTemplate)
@@ -103,48 +98,73 @@ window.onload = function () {
       }
       if (lang === 'vi' && isMr) {
         inputWelcomeValue = inputWelcomeTemplate[lang]
-          .replace(/{{firstName}}/g, 'anh ' + name.firstName)
+          .replace(/{{firstName}}/g, 'anh ' + firstName)
           .replace(/bạn/g, 'anh')
-          .replace(/{{lastName}}/g, name.lastName);
+          .replace(/{{lastName}}/g, lastName);
       } else {
         inputWelcomeValue = inputWelcomeTemplate[lang]
-          .replace(/{{firstName}}/g, name.firstName)
-          .replace(/{{lastName}}/g, name.lastName);
+          .replace(/{{firstName}}/g, firstName)
+          .replace(/{{lastName}}/g, lastName);
       }
-      acceptMsgComposeInputEl.value = inputWelcomeValue;
-      acceptMsgComposeSendBtnEl.disabled = false;
     });
   };
   document.arrive(acceptMsgComposePtn, function () {
     console.log('arrive: ', acceptMsgComposePtn);
-    let acceptMsgComposeFullNameEl = document.querySelector(acceptMsgComposeFullName);
-    if (!acceptMsgComposeFullNameEl) return;
-    const isFirstNameInTheEnd = false;
-    const name = splittedName(acceptMsgComposeFullNameEl.innerText, isFirstNameInTheEnd);
+    let fullName = document.querySelector(acceptMsgComposeFullName);
+    if (!fullName) return;
+    let acceptMsgComposeInputEl = document.querySelector(acceptMsgComposeInput);
+    const acceptMsgComposeSendBtnEl = document.querySelector(acceptMsgComposeSendBtn);
+    const name = splittedName(fullName.innerText);
+    const actionParent = document.querySelector(acceptMsgComposeActions);
 
-    btnCreateAcceptContentVi = generateBtnCreateAcceptContent(name.firstName + '(vi)');
+    btnCreateAcceptContentVi = generateBtnCreateAcceptContent(name.firstName + '🇻🇳', actionParent);
     btnCreateAcceptContentVi.addEventListener('click', function () {
-      generateAcceptContent('vi', false, false);
+      generateAcceptContent(name, 'vi', false, false);
+      acceptMsgComposeSendBtnEl.disabled = true;
+      setTimeout(function () {
+        acceptMsgComposeInputEl.value = inputWelcomeValue;
+        acceptMsgComposeSendBtnEl.disabled = false;
+      }, viewDelay);
     });
 
-    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(name.lastName + '(vi)');
+    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(name.lastName + '🇻🇳', actionParent);
     btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
-      generateAcceptContent('vi', false, true);
+      generateAcceptContent(name, 'vi', false, true);
+      acceptMsgComposeSendBtnEl.disabled = true;
+      setTimeout(function () {
+        acceptMsgComposeInputEl.value = inputWelcomeValue;
+        acceptMsgComposeSendBtnEl.disabled = false;
+      }, viewDelay);
     });
 
-    btnCreateAcceptContentViMr = generateBtnCreateAcceptContent('Anh ' + name.firstName + '(vi)');
+    btnCreateAcceptContentViMr = generateBtnCreateAcceptContent('Anh ' + name.firstName + '🇻🇳', actionParent);
     btnCreateAcceptContentViMr.addEventListener('click', function () {
-      generateAcceptContent('vi', true, false);
+      generateAcceptContent(name, 'vi', true, false);
+      acceptMsgComposeSendBtnEl.disabled = true;
+      setTimeout(function () {
+        acceptMsgComposeInputEl.value = inputWelcomeValue;
+        acceptMsgComposeSendBtnEl.disabled = false;
+      }, viewDelay);
     });
 
-    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent('Anh ' + name.lastName + '(vi)');
+    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent('Anh ' + name.lastName + '🇻🇳', actionParent);
     btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
-      generateAcceptContent('vi', true, true);
+      generateAcceptContent(name, 'vi', true, true);
+      acceptMsgComposeSendBtnEl.disabled = true;
+      setTimeout(function () {
+        acceptMsgComposeInputEl.value = inputWelcomeValue;
+        acceptMsgComposeSendBtnEl.disabled = false;
+      }, viewDelay);
     });
 
-    btnCreateAcceptContentEn = generateBtnCreateAcceptContent(name.firstName + '(en)');
+    btnCreateAcceptContentEn = generateBtnCreateAcceptContent(name.firstName + '🇺🇸', actionParent);
     btnCreateAcceptContentEn.addEventListener('click', function () {
-      generateAcceptContent('en', false, false);
+      generateAcceptContent(name, 'en', false, false);
+      acceptMsgComposeSendBtnEl.disabled = true;
+      setTimeout(function () {
+        acceptMsgComposeInputEl.value = inputWelcomeValue;
+        acceptMsgComposeSendBtnEl.disabled = false;
+      }, viewDelay);
     });
   });
 
@@ -165,8 +185,7 @@ window.onload = function () {
     } else {
       fullName = originalNameString.replace('Connect with ', '');
     }
-    let isFirstNameInTheEnd = false;
-    const name = splittedName(fullName, isFirstNameInTheEnd);
+    const name = splittedName(fullName);
     setTimeout(function () {
       // click add note
       document.querySelector(ptnInviteAddNote).click();
@@ -210,8 +229,74 @@ window.onload = function () {
    ************************************/
 
   document.arrive(bubbleChatWindow, function () {
-    const fullNamePtn = '.msg-overlay-bubble-header__primary-text';
-    const fullName = this.querySelector(fullNamePtn).innerText;
+    console.log('arrive: ', bubbleChatWindow);
+    const acceptMsgComposeSendBtnEl = this.querySelector('.msg-form__send-button');
+    const fullName = this.querySelector('.msg-overlay-bubble-header__primary-text').innerText;
+    if (!fullName) return;
+    let acceptMsgComposeInputEl = this.querySelector('.msg-form__contenteditable');
+    const actionParent = this.querySelector('.msg-form__footer');
+    const name = splittedName(fullName);
+    let paragraph;
 
+    btnCreateAcceptContentVi = generateBtnCreateAcceptContent(name.firstName + '🇻🇳', actionParent);
+    btnCreateAcceptContentVi.addEventListener('click', function () {
+      generateAcceptContent(name, 'vi', false, false);
+      acceptMsgComposeSendBtnEl.disabled = true;
+      setTimeout(function () {
+        paragraph = document.createElement('p');
+        paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        paragraph = paragraph.firstChild;
+        acceptMsgComposeInputEl.appendChild(paragraph);
+        acceptMsgComposeSendBtnEl.disabled = false;
+      }, viewDelay);
+    });
+
+    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(name.lastName + '🇻🇳', actionParent);
+    btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
+      generateAcceptContent(name, 'vi', false, true);
+      acceptMsgComposeSendBtnEl.disabled = true;
+      setTimeout(function () {
+        paragraph = document.createElement('p');
+        paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        acceptMsgComposeInputEl.appendChild(paragraph);
+        acceptMsgComposeSendBtnEl.disabled = false;
+      }, viewDelay);
+    });
+
+    btnCreateAcceptContentViMr = generateBtnCreateAcceptContent('Anh ' + name.firstName + '🇻🇳', actionParent);
+    btnCreateAcceptContentViMr.addEventListener('click', function () {
+      generateAcceptContent(name, 'vi', true, false);
+      acceptMsgComposeSendBtnEl.disabled = true;
+      setTimeout(function () {
+        paragraph = document.createElement('p');
+        paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        acceptMsgComposeInputEl.appendChild(paragraph);
+        acceptMsgComposeSendBtnEl.disabled = false;
+      }, viewDelay);
+    });
+
+    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent('Anh ' + name.lastName + '🇻🇳', actionParent);
+    btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
+      generateAcceptContent(name, 'vi', true, true);
+      acceptMsgComposeSendBtnEl.disabled = true;
+      setTimeout(function () {
+        paragraph = document.createElement('p');
+        paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        acceptMsgComposeInputEl.appendChild(paragraph);
+        acceptMsgComposeSendBtnEl.disabled = false;
+      }, viewDelay);
+    });
+
+    btnCreateAcceptContentEn = generateBtnCreateAcceptContent(name.firstName + '🇺🇸', actionParent);
+    btnCreateAcceptContentEn.addEventListener('click', function () {
+      generateAcceptContent(name, 'en', false, false);
+      acceptMsgComposeSendBtnEl.disabled = true;
+      setTimeout(function () {
+        paragraph = document.createElement('p');
+        paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        acceptMsgComposeInputEl.appendChild(paragraph);
+        acceptMsgComposeSendBtnEl.disabled = false;
+      }, viewDelay);
+    });
   });
 };
