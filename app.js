@@ -19,7 +19,6 @@ window.onload = function () {
 
   const bubbleChatWindow = '.msg-overlay-conversation-bubble';
 
-
   let inputWelcomeValue;
   let inputWelcomeTemplate = {
     en: '',
@@ -230,7 +229,7 @@ window.onload = function () {
 
   document.arrive(bubbleChatWindow, function () {
     console.log('arrive: ', bubbleChatWindow);
-    const acceptMsgComposeSendBtnEl = this.querySelector('.msg-form__send-button');
+    // const acceptMsgComposeSendBtnEl = this.querySelector('.msg-form__send-button');
     const fullName = this.querySelector('.msg-overlay-bubble-header__primary-text').innerText;
     if (!fullName) return;
     let acceptMsgComposeInputEl = this.querySelector('.msg-form__contenteditable');
