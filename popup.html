@@ -3,270 +3,99 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
   <style>
     body {
       border: 0;
-      width: 300px;
+      width: 600px;
       padding: 10px;
       background-color: #f4f6ff;
       margin: 0;
       padding-bottom: 0;
     }
-    .form-switcher input[type="checkbox"] {
-      display: none;
-    }
 
-    .form-switcher .switcher {
-      width: 38px;
-      height: 20px;
-      background: #ffffff;
-      border: 2px solid #e6e6e6;
-      padding: 0;
-      position: relative;
-      display: block;
-      cursor: pointer;
-      -moz-border-radius: 100px;
-      -webkit-border-radius: 100px;
-      border-radius: 100px;
-      -moz-transition: box-shadow 0.2s ease-out 0.02s, border-color 0.2s ease-out;
-      -o-transition: box-shadow 0.2s ease-out 0.02s, border-color 0.2s ease-out;
-      -webkit-transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out;
-      -webkit-transition-delay: 0.02s, 0s;
-      transition: box-shadow 0.2s ease-out 0.02s, border-color 0.2s ease-out;
-    }
-
-    .form-switcher .switcher:after {
-      background: #ffffff;
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: "";
-      -moz-transform: translateX(0);
-      -ms-transform: translateX(0);
-      -webkit-transform: translateX(0);
-      transform: translateX(0);
-      -moz-transition: all 0.2s ease-out;
-      -o-transition: all 0.2s ease-out;
-      -webkit-transition: all 0.2s ease-out;
-      transition: all 0.2s ease-out;
-      -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-      -moz-border-radius: 100px;
-      -webkit-border-radius: 100px;
-      border-radius: 100px;
-      height: 20px;
-      width: 20px;
-    }
-
-    .form-switcher .switcher:hover:active {
-      -moz-box-shadow: 0px 0px 0px 13px #e6e6e6 inset;
-      -webkit-box-shadow: 0px 0px 0px 13px #e6e6e6 inset;
-      box-shadow: 0px 0px 0px 13px #e6e6e6 inset;
-    }
-
-    .form-switcher .switcher:hover:active:after {
-      width: 28.35px !important;
-    }
-
-    /* checked */
-    
-  .form-switcher input[type="checkbox"]:checked + .switcher {
-    border-color: #16b85f;
-    -moz-box-shadow: 0px 0px 0px 12.5px #16b85f inset;
-    -webkit-box-shadow: 0px 0px 0px 12.5px #16b85f inset;
-    box-shadow: 0px 0px 0px 12.5px #16b85f inset;
-  }
-
-    .form-switcher input[type="checkbox"]:checked+.switcher {
-      -moz-transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out 0.02s;
-      -o-transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out 0.02s;
-      -webkit-transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out;
-      -webkit-transition-delay: 0s, 0.02s;
-      transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out 0.02s;
-    }
-
-    .form-switcher input[type="checkbox"]:checked+.switcher:after {
-      -moz-transform: translateX(18px);
-      -ms-transform: translateX(18px);
-      -webkit-transform: translateX(18px);
-      transform: translateX(18px);
-    }
-
-    /* line 42, ../sass/_switcher-mixin.scss */
-    .form-switcher input[type="checkbox"]:checked+.switcher:hover:active:after {
-      -moz-transform: translateX(10.65px);
-      -ms-transform: translateX(10.65px);
-      -webkit-transform: translateX(10.65px);
-      transform: translateX(10.65px);
-    }
-    .config {
-      display: table;
+    .w-100 {
       width: 100%;
     }
-    .config_text {
-      display: table-cell;
-      vertical-align: middle;
-      padding-right: 10px;
-      font-weight: 700;
-    }
-    .config_setting {
-      text-align: right;
-      display: table-cell;
-      vertical-align: middle;
-    }
-    .config .true {
-      display: none;
-      background: #4CAF50;
-      color: white;
-      border-radius: 10px;
-      padding: 0 5px;
-    }
-    .config .false {
-      display: inline-block;
-      background: #f73737;
-      color: white;
-      border-radius: 10px;
-      padding: 0 5px;
-    }
-    .config.blocking .true {
-      display: inline-block;
-    }
-    .config.blocking .false {
-      display: none;
-    }
-    .footer {
-      display: table;
-      width: 100%;
-      clear: both;
-      margin-top: 7px;
-    }
-    .act-item {
-      opacity: .5;
-      font-size: .8em;
-      padding: 6px;
-      -moz-transition: all 0.2s ease-out 0.02s;
-      -o-transition: all 0.2s ease-out 0.02s;
-      -webkit-transition: all 0.2s ease-out;
-      -webkit-transition-delay: 0.02s, 0s;
-      line-height: 14px;
-    }
-    .act-item img {
-      width: 15px;
-    }
-    .act-item:hover {
-      background: #e1e4f3;
-      opacity: 1;
-    }
-    .footer .act-item {
-      cursor: pointer;
-      border-radius: 4px;
-      display: table-cell;
-      width: 35%;
-      vertical-align: middle;
-    }
-    .footer .act-item:last-child {
-      width: 20%;
-    }
-    .footer .ico {
-      display: inline-block;
+
+    .w-50 {
       float: left;
-      margin-right: 6px;
-    }
-    .footer .text {
+      width: 50%;
+      border: 0;
+      margin: 0;
+      box-sizing: border-box;
       display: inline-block;
-      float: left;
     }
-    .donate {
-      display: block;
+
+    .body textarea {
       width: 100%;
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.15s ease-out;
-      -moz-transition: max-height 0.15s ease-out;
-      -o-transition: max-height 0.15s ease-out;
-      -webkit-transition: max-height 0.15s ease-out;
+      height: 70px;
+      border-radius: 2px;
+      border-color: #eee;
+      border: 0;
+      margin: 0;
+      box-sizing: border-box;
+      padding: 5px;
     }
-    .donate.show {
-      max-height: 80px;
+
+    .body button {
+      float: right;
+      width: 70px;
+      margin-right: 0;
+      height: 25px;
+      border-radius: 2px;
+      background-color: #247bc1;
+      color: #fff;
+      border: 0;
     }
+
     .btn {
       cursor: pointer;
     }
+
     .line-height {
-      display: inline-block; height: 14px; line-height: 14px; float: left;
+      display: inline-block;
+      height: 14px;
+      line-height: 14px;
+      float: left;
     }
   </style>
 </head>
 
 <body>
-  <div id="config"
-       class="config">
-    <div class="config_text">
-      Block facebook sponsors ads
-      <span class="true">Blocking...</span>
-      <span class="false">Nonblocking</span>
-    </div>
-    <div class="config_setting">
-      <div class="form-switcher">
-        <input type="checkbox"
-               name="blocker"
-               checked="true"
-               id="blocker">
-        <label class="switcher"
-               for="blocker">
-        </label>
+  <div
+    id="body"
+    class="body"
+  >
+    <div class="w-100">
+      <div class="w-50">
+        <h3>Welcome [Vietnamese]:</h3>
+        <textarea id="inputWelcomeMsgVi"></textarea>
+      </div>
+      <div class="w-50">
+        <h3>Welcome [English]:</h3>
+        <textarea id="inputWelcomeMsgEn"></textarea>
       </div>
     </div>
-  </div>
-  <div id="footer"
-       class="footer">
-    <a class="act-item"
-       href="mailto:vnaking@gmail.com?subject=Feedback Facebook AdBlock 0.0.1"
-       target="_blank">
-      <span class="ico">
-        <img src="./ico-feedback.png"
-             alt="">
-      </span>
-      <span class="text">
-        feedback
-      </span>
-    </a>
-    <a class="act-item"
-       href="https://chrome.google.com/webstore/detail/facebook-adblock/lhoblfljjkoeaglhlgjhegbhabnmgoga?hl=en"
-       target="_blank">
-      <span class="ico">
-        <img src="./ico-rating.png"
-             alt="">
-      </span>
-      <span class="text">
-        rating
-      </span>
-    </a>
-    <div class="act-item"
-         id="toggleDonate">
-      <span class="ico">
-        <img src="./ico-opacity.png"
-             alt="">
-      </span>
-      <span class="text">
-        donate
-      </span>
+    <hr>
+    <div class="w-100">
+      <div class="w-50">
+        <h3>Invitation [Vietnamese]:</h3>
+        <textarea id="inputInvitationMsgVi"></textarea>
+      </div>
+      <div class="w-50">
+        <h3>Invitation [English]:</h3>
+        <textarea id="inputInvitationMsgEn"></textarea>
+      </div>
     </div>
-  </div>
-  <div id="donate"
-       class="donate">
-    <div class="act-item">
-      <span>
-        <img class="line-height"
-             src="./ico-ethereum.png" /><span class="line-height">Ethereum</span><br />
-      </span>
-
-      <span class="wallet"></span> <button id="copyWallet"
-              class="btn">copy</button>
-    </div>
+    <hr>
+    <button
+      class="btn"
+      id="saveBtn"
+    >save</button>
   </div>
   <script src="popup.js"></script>
 </body>

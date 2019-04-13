@@ -1,12 +1,16 @@
-.userContentWrapper {
-  -webkit-transition: all .3s;
-  transition: all .3s;
+.button-primary-small {
+  margin-right: 2px;
 }
 
-.ad-removed {
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
+.msg-form--overlay .msg-form__footer {
+  height: auto !important;
+  display: block !important;
+}
+
+.rr-btn-xs {
+  zoom: 0.8;
+}
+
+.pv-s-profile-actions--connect span {
   pointer-events: none;
 }

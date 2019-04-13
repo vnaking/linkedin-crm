@@ -1,13 +1,12 @@
 {
-  "name": "Facebook AdBlock",
+  "name": "Linkedin CRM",
   "version": "0.1.1",
   "author": "Toan Nguyen",
   "manifest_version": 2,
-  "description": "Hide all ads and hide page suggestions on facebook",
+  "description": "Linkedin CRM",
   "permissions": [
-    "http://www.facebook.com/*",
-    "https://www.facebook.com/*",
-    "https://web.facebook.com/*",
+    "http://www.linkedin.com/*",
+    "https://www.linkedin.com/*",
     "activeTab",
     "declarativeContent",
     "storage"
@@ -28,11 +27,7 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "http://www.facebook.com/*",
-        "https://www.facebook.com/*",
-        "https://web.facebook.com/*"
-      ],
+      "matches": ["http://www.linkedin.com/*", "https://www.linkedin.com/*"],
       "css": ["app.css"],
       "js": ["arrive.min.js", "app.js"],
       "run_at": "document_end",

@@ -1,72 +1,57 @@
-let blocker = document.querySelector('#blocker');
-let config = document.querySelector('#config');
-let donate = document.querySelector('#donate');
-let toggleDonate = document.querySelector('#toggleDonate');
-let copyWallet = document.querySelector('#copyWallet');
-const ethWallet = '0xF69D5f8897Ada9880e45d11d7fec9c926D7091F5';
-let isShowingDonate = false;
-const classBlocking = 'blocking';
+const inputWelcomeMsgVi = document.querySelector('#inputWelcomeMsgVi');
+const inputWelcomeMsgEn = document.querySelector('#inputWelcomeMsgEn');
+const inputInvitationMsgVi = document.querySelector('#inputInvitationMsgVi');
+const inputInvitationMsgEn = document.querySelector('#inputInvitationMsgEn');
+let inputWelcomeTemplate = {
+  en: '',
+  vi: ''
+};
+let inputInvitationTemplate = {
+  en: '',
+  vi: ''
+};
+const saveBtn = document.querySelector('#saveBtn');
 
-const toggleBlockingClass = function (isBlockAds) {
-  if (isBlockAds) {
-    config.classList.add(classBlocking);
-  } else {
-    config.classList.remove(classBlocking);
-  }
+const saveTemplate = function () {
+  inputWelcomeTemplate.en = inputWelcomeMsgEn.value;
+  inputWelcomeTemplate.vi = inputWelcomeMsgVi.value;
+  inputInvitationTemplate.en = inputInvitationMsgEn.value;
+  inputInvitationTemplate.vi = inputInvitationMsgVi.value;
+  chrome.storage.sync.set({
+      inputWelcomeTemplate: JSON.stringify(inputWelcomeTemplate),
+      inputInvitationTemplate: JSON.stringify(inputInvitationTemplate)
+    },
+    function () {}
+  );
 };
 
-const copyStringToClipboard = function (str) {
-  var el = document.createElement('textarea');
-  el.value = str;
-  el.setAttribute('readonly', '');
-  el.style = { position: 'absolute', width: '0px', left: '-9999px' };
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand('copy');
-  document.body.removeChild(el);
-}
-
-copyWallet.addEventListener('click', function () {
-  copyStringToClipboard(ethWallet);
-});
-
-toggleDonate.addEventListener('click', function () {
-  isShowingDonate = !isShowingDonate;
-  if (isShowingDonate) {
-    donate.classList.add('show');
-  } else {
-    donate.classList.remove('show');
-  }
-});
+saveBtn.addEventListener('click', saveTemplate);
 
 window.onload = function () {
-  // Set value of toggle
-  donate.querySelector('.wallet').textContent = ethWallet;
-  chrome.storage.sync.get(['isBlockAds'], function (result) {
+  chrome.storage.sync.get(['inputWelcomeTemplate'], function (result) {
     if (!result) {
-      chrome.storage.sync.set({ isBlockAds: true }, function () {
-      });
-      blocker.checked = true;
-      toggleBlockingClass(true);
+      chrome.storage.sync.set({
+          inputWelcomeTemplate: JSON.stringify(inputWelcomeTemplate)
+        },
+        function () {}
+      );
     } else {
-      let isBlockAds = result.isBlockAds;
-      blocker.checked = isBlockAds;
-      toggleBlockingClass(isBlockAds);
+      inputWelcomeTemplate = JSON.parse(result.inputWelcomeTemplate);
+      inputWelcomeMsgVi.value = inputWelcomeTemplate.vi;
+      inputWelcomeMsgEn.value = inputWelcomeTemplate.en;
+    }
+  });
+  chrome.storage.sync.get(['inputInvitationTemplate'], function (result) {
+    if (!result) {
+      chrome.storage.sync.set({
+          inputInvitationTemplate: JSON.stringify(inputInvitationTemplate)
+        },
+        function () {}
+      );
+    } else {
+      inputInvitationTemplate = JSON.parse(result.inputInvitationTemplate);
+      inputInvitationMsgVi.value = inputInvitationTemplate.vi;
+      inputInvitationMsgEn.value = inputInvitationTemplate.en;
     }
   });
 };
-
-// Listen toggle change
-blocker.addEventListener('change', function (event) {
-  let isBlockAds = event.target.checked;
-  toggleBlockingClass(isBlockAds);
-  chrome.storage.sync.set({ isBlockAds: isBlockAds }, function () {
-    console.log('isBlockAds is ' + isBlockAds);
-  });
-  chrome.tabs.query({ active: true }, function (tabs) {
-    chrome.tabs.executeScript(
-      tabs[0].id,
-      { code: '(window.onload = function () { window.toggleAds(' + isBlockAds + '); })();' });
-  });
-});
-
