@@ -120,50 +120,50 @@ window.onload = function () {
     btnCreateAcceptContentVi = generateBtnCreateAcceptContent(name.firstName + '🇻🇳', actionParent);
     btnCreateAcceptContentVi.addEventListener('click', function () {
       generateAcceptContent(name, 'vi', false, false);
-      acceptMsgComposeSendBtnEl.disabled = true;
+      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         acceptMsgComposeInputEl.value = inputWelcomeValue;
-        acceptMsgComposeSendBtnEl.disabled = false;
+        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
     btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(name.lastName + '🇻🇳', actionParent);
     btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
       generateAcceptContent(name, 'vi', false, true);
-      acceptMsgComposeSendBtnEl.disabled = true;
+      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         acceptMsgComposeInputEl.value = inputWelcomeValue;
-        acceptMsgComposeSendBtnEl.disabled = false;
+        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
     btnCreateAcceptContentViMr = generateBtnCreateAcceptContent('Anh ' + name.firstName + '🇻🇳', actionParent);
     btnCreateAcceptContentViMr.addEventListener('click', function () {
       generateAcceptContent(name, 'vi', true, false);
-      acceptMsgComposeSendBtnEl.disabled = true;
+      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         acceptMsgComposeInputEl.value = inputWelcomeValue;
-        acceptMsgComposeSendBtnEl.disabled = false;
+        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
     btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent('Anh ' + name.lastName + '🇻🇳', actionParent);
     btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
       generateAcceptContent(name, 'vi', true, true);
-      acceptMsgComposeSendBtnEl.disabled = true;
+      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         acceptMsgComposeInputEl.value = inputWelcomeValue;
-        acceptMsgComposeSendBtnEl.disabled = false;
+        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
     btnCreateAcceptContentEn = generateBtnCreateAcceptContent(name.firstName + '🇺🇸', actionParent);
     btnCreateAcceptContentEn.addEventListener('click', function () {
       generateAcceptContent(name, 'en', false, false);
-      acceptMsgComposeSendBtnEl.disabled = true;
+      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         acceptMsgComposeInputEl.value = inputWelcomeValue;
-        acceptMsgComposeSendBtnEl.disabled = false;
+        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
   });
@@ -241,61 +241,60 @@ window.onload = function () {
     btnCreateAcceptContentVi = generateBtnCreateAcceptContent(name.firstName + '🇻🇳', actionParent);
     btnCreateAcceptContentVi.addEventListener('click', function () {
       generateAcceptContent(name, 'vi', false, false);
-      acceptMsgComposeSendBtnEl.disabled = true;
+      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
         paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
-        paragraph = paragraph.firstChild;
         acceptMsgComposeInputEl.appendChild(paragraph);
-        acceptMsgComposeSendBtnEl.disabled = false;
+        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
     btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(name.lastName + '🇻🇳', actionParent);
     btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
       generateAcceptContent(name, 'vi', false, true);
-      acceptMsgComposeSendBtnEl.disabled = true;
+      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
         paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
         acceptMsgComposeInputEl.appendChild(paragraph);
-        acceptMsgComposeSendBtnEl.disabled = false;
+        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
     btnCreateAcceptContentViMr = generateBtnCreateAcceptContent('Anh ' + name.firstName + '🇻🇳', actionParent);
     btnCreateAcceptContentViMr.addEventListener('click', function () {
       generateAcceptContent(name, 'vi', true, false);
-      acceptMsgComposeSendBtnEl.disabled = true;
+      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
         paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
         acceptMsgComposeInputEl.appendChild(paragraph);
-        acceptMsgComposeSendBtnEl.disabled = false;
+        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
     btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent('Anh ' + name.lastName + '🇻🇳', actionParent);
     btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
       generateAcceptContent(name, 'vi', true, true);
-      acceptMsgComposeSendBtnEl.disabled = true;
+      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
         paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
         acceptMsgComposeInputEl.appendChild(paragraph);
-        acceptMsgComposeSendBtnEl.disabled = false;
+        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
     btnCreateAcceptContentEn = generateBtnCreateAcceptContent(name.firstName + '🇺🇸', actionParent);
     btnCreateAcceptContentEn.addEventListener('click', function () {
       generateAcceptContent(name, 'en', false, false);
-      acceptMsgComposeSendBtnEl.disabled = true;
+      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
         paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
         acceptMsgComposeInputEl.appendChild(paragraph);
-        acceptMsgComposeSendBtnEl.disabled = false;
+        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
   });
