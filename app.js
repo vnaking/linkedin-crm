@@ -230,8 +230,11 @@ window.onload = function () {
   document.arrive(bubbleChatWindow, function () {
     console.log('arrive: ', bubbleChatWindow);
     // const acceptMsgComposeSendBtnEl = this.querySelector('.msg-form__send-button');
-    const fullName = this.querySelector('.msg-overlay-bubble-header__primary-text').innerText;
+    let fullName = this.querySelector('.msg-overlay-bubble-header__primary-text').innerText;
     if (!fullName) return;
+    if (fullName === 'New message') {
+      fullName = this.querySelector('.msg-connections-typeahead__recipient-name').innerText;
+    }
     let acceptMsgComposeInputEl = this.querySelector('.msg-form__contenteditable');
     const actionParent = this.querySelector('.msg-form__footer');
     const name = splittedName(fullName);
