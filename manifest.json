@@ -5,7 +5,6 @@
   "manifest_version": 2,
   "description": "Linkedin CRM",
   "permissions": [
-    "http://www.linkedin.com/*",
     "https://www.linkedin.com/*",
     "activeTab",
     "declarativeContent",
@@ -25,13 +24,13 @@
       "48": "logo48.png"
     }
   },
-  "content_scripts": [
-    {
-      "matches": ["http://www.linkedin.com/*", "https://www.linkedin.com/*"],
-      "css": ["app.css"],
-      "js": ["arrive.min.js", "app.js"],
-      "run_at": "document_end",
-      "all_frames": true
-    }
-  ]
+  "content_scripts": [{
+    "matches": [
+      "https://www.linkedin.com/*"
+    ],
+    "css": ["app.css"],
+    "js": ["arrive.min.js", "app.js"],
+    "run_at": "document_end",
+    "all_frames": true
+  }]
 }
