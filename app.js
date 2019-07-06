@@ -3,7 +3,7 @@
 // [attribute^="value"] attribute value begins with a specified value.
 // [attribute$="value"] attribute value ends with a specified value.
 // [attribute*="value"] attribute value contains a specified value.
-window.onload = function () {
+window.onload = function() {
   console.log('begin');
   const viewDelay = 100;
   const acceptMsgComposeInput = '.msg-messaging-form__form textarea';
@@ -35,7 +35,7 @@ window.onload = function () {
   let btnCreateAcceptContentViMr;
   let btnCreateAcceptContentEn;
 
-  const copyContent = function (value) {
+  const copyContent = function(value) {
     var el = document.createElement('textarea');
     el.value = value;
     el.setAttribute('readonly', '');
@@ -49,12 +49,12 @@ window.onload = function () {
     document.execCommand('copy');
     document.body.removeChild(el);
   };
-  const splittedName = function (fullName) {
+  const splittedName = function(fullName) {
     let fullNameArr, firstName, lastName;
     let temp = {
       firstName: '',
       lastName: ''
-    }
+    };
     if (!fullName || !fullName.length) {
       return temp;
     }
@@ -64,8 +64,8 @@ window.onload = function () {
     temp.firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
     temp.lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
     return temp;
-  }
-  const generateBtnCreateAcceptContent = function (btnText, parent) {
+  };
+  const generateBtnCreateAcceptContent = function(btnText, parent) {
     var btn = document.createElement('a');
     btn.classList = 'msg-form__send-button button-primary-small rr-btn-xs';
     btn.innerText = btnText;
@@ -77,7 +77,12 @@ window.onload = function () {
   /************************************
    ********* Accept message ********
    ************************************/
-  const generateAcceptContent = function (name, lang, isMr, isFirstNameInTheEnd) {
+  const generateAcceptContent = function(
+    name,
+    lang,
+    isMr,
+    isFirstNameInTheEnd
+  ) {
     if (!name) return;
     let firstName = name.firstName;
     let lastName = name.lastName;
@@ -85,12 +90,13 @@ window.onload = function () {
       firstName = name.lastName;
       lastName = name.firstName;
     }
-    return chrome.storage.sync.get(['inputWelcomeTemplate'], function (result) {
+    return chrome.storage.sync.get(['inputWelcomeTemplate'], function(result) {
       if (!result) {
-        chrome.storage.sync.set({
+        chrome.storage.sync.set(
+          {
             inputWelcomeTemplate: JSON.stringify(inputWelcomeTemplate)
           },
-          function () {}
+          function() {}
         );
       } else {
         inputWelcomeTemplate = JSON.parse(result.inputWelcomeTemplate);
@@ -107,60 +113,77 @@ window.onload = function () {
       }
     });
   };
-  document.arrive(acceptMsgComposePtn, function () {
+  document.arrive(acceptMsgComposePtn, function() {
     console.log('arrive: ', acceptMsgComposePtn);
     let fullName = document.querySelector(acceptMsgComposeFullName);
     if (!fullName) return;
     let acceptMsgComposeInputEl = document.querySelector(acceptMsgComposeInput);
-    const acceptMsgComposeSendBtnEl = document.querySelector(acceptMsgComposeSendBtn);
+    const acceptMsgComposeSendBtnEl = document.querySelector(
+      acceptMsgComposeSendBtn
+    );
     const name = splittedName(fullName.innerText);
     const actionParent = document.querySelector(acceptMsgComposeActions);
 
-    btnCreateAcceptContentVi = generateBtnCreateAcceptContent(name.firstName + '🇻🇳', actionParent);
-    btnCreateAcceptContentVi.addEventListener('click', function () {
+    btnCreateAcceptContentVi = generateBtnCreateAcceptContent(
+      name.firstName + '🇻🇳',
+      actionParent
+    );
+    btnCreateAcceptContentVi.addEventListener('click', function() {
       generateAcceptContent(name, 'vi', false, false);
       // acceptMsgComposeSendBtnEl.disabled = true;
-      setTimeout(function () {
+      setTimeout(function() {
         acceptMsgComposeInputEl.value = inputWelcomeValue;
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
-    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(name.lastName + '🇻🇳', actionParent);
-    btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
+    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(
+      name.lastName + '🇻🇳',
+      actionParent
+    );
+    btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function() {
       generateAcceptContent(name, 'vi', false, true);
       // acceptMsgComposeSendBtnEl.disabled = true;
-      setTimeout(function () {
+      setTimeout(function() {
         acceptMsgComposeInputEl.value = inputWelcomeValue;
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
-    btnCreateAcceptContentViMr = generateBtnCreateAcceptContent('Anh ' + name.firstName + '🇻🇳', actionParent);
-    btnCreateAcceptContentViMr.addEventListener('click', function () {
+    btnCreateAcceptContentViMr = generateBtnCreateAcceptContent(
+      'Anh ' + name.firstName + '🇻🇳',
+      actionParent
+    );
+    btnCreateAcceptContentViMr.addEventListener('click', function() {
       generateAcceptContent(name, 'vi', true, false);
       // acceptMsgComposeSendBtnEl.disabled = true;
-      setTimeout(function () {
+      setTimeout(function() {
         acceptMsgComposeInputEl.value = inputWelcomeValue;
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
-    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent('Anh ' + name.lastName + '🇻🇳', actionParent);
-    btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
+    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(
+      'Anh ' + name.lastName + '🇻🇳',
+      actionParent
+    );
+    btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function() {
       generateAcceptContent(name, 'vi', true, true);
       // acceptMsgComposeSendBtnEl.disabled = true;
-      setTimeout(function () {
+      setTimeout(function() {
         acceptMsgComposeInputEl.value = inputWelcomeValue;
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
-    btnCreateAcceptContentEn = generateBtnCreateAcceptContent(name.firstName + '🇺🇸', actionParent);
-    btnCreateAcceptContentEn.addEventListener('click', function () {
+    btnCreateAcceptContentEn = generateBtnCreateAcceptContent(
+      name.firstName + '🇺🇸',
+      actionParent
+    );
+    btnCreateAcceptContentEn.addEventListener('click', function() {
       generateAcceptContent(name, 'en', false, false);
       // acceptMsgComposeSendBtnEl.disabled = true;
-      setTimeout(function () {
+      setTimeout(function() {
         acceptMsgComposeInputEl.value = inputWelcomeValue;
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
@@ -170,7 +193,7 @@ window.onload = function () {
   /************************************
    ********** Invitations msg *********
    ************************************/
-  const generateInvitationContent = function (event) {
+  const generateInvitationContent = function(event) {
     let originalNameString = event.target.getAttribute('aria-label');
     if (!originalNameString || !originalNameString.length) {
       const lastSpan = event.target.querySelector('span:last-child');
@@ -185,20 +208,23 @@ window.onload = function () {
       fullName = originalNameString.replace('Connect with ', '');
     }
     const name = splittedName(fullName);
-    setTimeout(function () {
+    setTimeout(function() {
       // click add note
       document.querySelector(ptnInviteAddNote).click();
-      // insert content 
-      setTimeout(function () {
-        chrome.storage.sync.get(['inputInvitationTemplate'], function (result) {
+      // insert content
+      setTimeout(function() {
+        chrome.storage.sync.get(['inputInvitationTemplate'], function(result) {
           if (!result) {
-            chrome.storage.sync.set({
+            chrome.storage.sync.set(
+              {
                 inputInvitationTemplate: JSON.stringify(inputInvitationTemplate)
               },
-              function () {}
+              function() {}
             );
           } else {
-            inputInvitationTemplate = JSON.parse(result.inputInvitationTemplate);
+            inputInvitationTemplate = JSON.parse(
+              result.inputInvitationTemplate
+            );
           }
           inputInvitationValue = inputInvitationTemplate['en']
             .replace(/{{firstName}}/g, name.firstName)
@@ -216,10 +242,10 @@ window.onload = function () {
   if (btnInviteSingle) {
     btnInviteSingle.addEventListener('click', generateInvitationContent);
   }
-  document.arrive(ptnButtonConnect, function () {
+  document.arrive(ptnButtonConnect, function() {
     this.addEventListener('click', generateInvitationContent);
   });
-  document.arrive(ptnButtonConnectSingel, function () {
+  document.arrive(ptnButtonConnectSingel, function() {
     this.addEventListener('click', generateInvitationContent);
   });
 
@@ -227,74 +253,110 @@ window.onload = function () {
    ************ Bubble chat ***********
    ************************************/
 
-  document.arrive(bubbleChatWindow, function () {
+  document.arrive(bubbleChatWindow, function() {
     console.log('arrive: ', bubbleChatWindow);
     // const acceptMsgComposeSendBtnEl = this.querySelector('.msg-form__send-button');
-    let fullName = this.querySelector('.msg-overlay-bubble-header__primary-text').innerText;
+    let fullName = this.querySelector(
+      '.msg-overlay-bubble-header__primary-text'
+    ).innerText;
     if (!fullName) return;
     if (fullName === 'New message') {
-      fullName = this.querySelector('.msg-connections-typeahead__recipient-name').innerText;
+      fullName = this.querySelector(
+        '.msg-connections-typeahead__added-recipients'
+      ).innerText;
     }
-    let acceptMsgComposeInputEl = this.querySelector('.msg-form__contenteditable');
+    let acceptMsgComposeInputEl = this.querySelector(
+      '.msg-form__contenteditable'
+    );
     const actionParent = this.querySelector('.msg-form__footer');
     const name = splittedName(fullName);
     let paragraph;
 
-    btnCreateAcceptContentVi = generateBtnCreateAcceptContent(name.firstName + '🇻🇳', actionParent);
-    btnCreateAcceptContentVi.addEventListener('click', function () {
+    btnCreateAcceptContentVi = generateBtnCreateAcceptContent(
+      name.firstName + '🇻🇳',
+      actionParent
+    );
+    btnCreateAcceptContentVi.addEventListener('click', function() {
       generateAcceptContent(name, 'vi', false, false);
       // acceptMsgComposeSendBtnEl.disabled = true;
-      setTimeout(function () {
+      setTimeout(function() {
         paragraph = document.createElement('p');
-        paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        paragraph.innerHTML = inputWelcomeValue.replace(
+          /(?:\r\n|\r|\n)/g,
+          '<br>'
+        );
         acceptMsgComposeInputEl.appendChild(paragraph);
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
-    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(name.lastName + '🇻🇳', actionParent);
-    btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
+    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(
+      name.lastName + '🇻🇳',
+      actionParent
+    );
+    btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function() {
       generateAcceptContent(name, 'vi', false, true);
       // acceptMsgComposeSendBtnEl.disabled = true;
-      setTimeout(function () {
+      setTimeout(function() {
         paragraph = document.createElement('p');
-        paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        paragraph.innerHTML = inputWelcomeValue.replace(
+          /(?:\r\n|\r|\n)/g,
+          '<br>'
+        );
         acceptMsgComposeInputEl.appendChild(paragraph);
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
-    btnCreateAcceptContentViMr = generateBtnCreateAcceptContent('Anh ' + name.firstName + '🇻🇳', actionParent);
-    btnCreateAcceptContentViMr.addEventListener('click', function () {
+    btnCreateAcceptContentViMr = generateBtnCreateAcceptContent(
+      'Anh ' + name.firstName + '🇻🇳',
+      actionParent
+    );
+    btnCreateAcceptContentViMr.addEventListener('click', function() {
       generateAcceptContent(name, 'vi', true, false);
       // acceptMsgComposeSendBtnEl.disabled = true;
-      setTimeout(function () {
+      setTimeout(function() {
         paragraph = document.createElement('p');
-        paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        paragraph.innerHTML = inputWelcomeValue.replace(
+          /(?:\r\n|\r|\n)/g,
+          '<br>'
+        );
         acceptMsgComposeInputEl.appendChild(paragraph);
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
-    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent('Anh ' + name.lastName + '🇻🇳', actionParent);
-    btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
+    btnCreateAcceptContentViFirstnameEnd = generateBtnCreateAcceptContent(
+      'Anh ' + name.lastName + '🇻🇳',
+      actionParent
+    );
+    btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function() {
       generateAcceptContent(name, 'vi', true, true);
       // acceptMsgComposeSendBtnEl.disabled = true;
-      setTimeout(function () {
+      setTimeout(function() {
         paragraph = document.createElement('p');
-        paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        paragraph.innerHTML = inputWelcomeValue.replace(
+          /(?:\r\n|\r|\n)/g,
+          '<br>'
+        );
         acceptMsgComposeInputEl.appendChild(paragraph);
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
-    btnCreateAcceptContentEn = generateBtnCreateAcceptContent(name.firstName + '🇺🇸', actionParent);
-    btnCreateAcceptContentEn.addEventListener('click', function () {
+    btnCreateAcceptContentEn = generateBtnCreateAcceptContent(
+      name.firstName + '🇺🇸',
+      actionParent
+    );
+    btnCreateAcceptContentEn.addEventListener('click', function() {
       generateAcceptContent(name, 'en', false, false);
       // acceptMsgComposeSendBtnEl.disabled = true;
-      setTimeout(function () {
+      setTimeout(function() {
         paragraph = document.createElement('p');
-        paragraph.innerHTML = inputWelcomeValue.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        paragraph.innerHTML = inputWelcomeValue.replace(
+          /(?:\r\n|\r|\n)/g,
+          '<br>'
+        );
         acceptMsgComposeInputEl.appendChild(paragraph);
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
