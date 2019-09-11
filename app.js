@@ -14,7 +14,7 @@ window.onload = function() {
 
   const ptnButtonConnect = 'button[aria-label^="Connect with"]';
   const ptnButtonConnectSingel = '.pv-s-profile-actions--connect';
-  const ptnInviteAddNote = 'div.send-invite__actions > button:first-child';
+  const ptnInviteAddNote = 'button[aria-label="Add a note"]';
   const ptnCustomMessage = '#custom-message';
 
   const bubbleChatWindow = '.msg-overlay-conversation-bubble';
@@ -132,6 +132,9 @@ window.onload = function() {
       generateAcceptContent(name, 'vi', false, false);
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function() {
+        if(!acceptMsgComposeInputEl) {
+          return;
+        }
         acceptMsgComposeInputEl.value = inputWelcomeValue;
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
@@ -145,6 +148,9 @@ window.onload = function() {
       generateAcceptContent(name, 'vi', false, true);
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function() {
+        if(!acceptMsgComposeInputEl) {
+          return;
+        }
         acceptMsgComposeInputEl.value = inputWelcomeValue;
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
@@ -158,6 +164,9 @@ window.onload = function() {
       generateAcceptContent(name, 'vi', true, false);
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function() {
+        if(!acceptMsgComposeInputEl) {
+          return;
+        }
         acceptMsgComposeInputEl.value = inputWelcomeValue;
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
@@ -171,6 +180,9 @@ window.onload = function() {
       generateAcceptContent(name, 'vi', true, true);
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function() {
+        if(!acceptMsgComposeInputEl) {
+          return;
+        }
         acceptMsgComposeInputEl.value = inputWelcomeValue;
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
@@ -184,6 +196,9 @@ window.onload = function() {
       generateAcceptContent(name, 'en', false, false);
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function() {
+        if(!acceptMsgComposeInputEl) {
+          return;
+        }
         acceptMsgComposeInputEl.value = inputWelcomeValue;
         // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
@@ -229,7 +244,10 @@ window.onload = function() {
           inputInvitationValue = inputInvitationTemplate['en']
             .replace(/{{firstName}}/g, name.firstName)
             .replace(/{{lastName}}/g, name.lastName);
-          document.querySelector(ptnCustomMessage).value = inputInvitationValue;
+          const customMessageEl = document.querySelector(ptnCustomMessage);
+          if(customMessageEl){
+            customMessageEl.value = inputInvitationValue;
+          }
         });
       }, viewDelay);
     }, viewDelay);
