@@ -28,6 +28,7 @@ const saveTemplate = function () {
     },
     function () {}
   );
+  alert('Saved!');
 };
 
 saveBtn.addEventListener('click', saveTemplate);

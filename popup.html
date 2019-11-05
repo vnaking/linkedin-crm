@@ -3,10 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       border: 0;
@@ -66,18 +63,25 @@
 </head>
 
 <body>
-  <div
-    id="body"
-    class="body"
-  >
+  <div id="body" class="body">
     <div class="w-100">
+      <p>
+        <small>use: {{firstName}} {{lastName}}</small>
+      </p>
       <div class="w-50">
         <h3>Welcome [Vietnamese]:</h3>
         <textarea id="inputWelcomeMsgVi"></textarea>
       </div>
       <div class="w-50">
         <h3>Welcome [English]:</h3>
-        <textarea id="inputWelcomeMsgEn"></textarea>
+        <textarea id="inputWelcomeMsgEn">
+            Hi {{firstName}}, 
+
+            Thanks for reaching out. And glad to be in your network. 
+            I’m very impressed with your work, please let me know if any collaboration opportunities.  
+            
+            - Toan, Founder at www.recruitery.co
+        </textarea>
       </div>
     </div>
     <hr>
@@ -88,7 +92,14 @@
       </div>
       <div class="w-50">
         <h3>Invitation [English]:</h3>
-        <textarea id="inputInvitationMsgEn"></textarea>
+        <textarea id="inputInvitationMsgEn">
+          
+          Hi {{firstName}},  
+          
+          I’m very impressed with your work And would love to be in your network.  
+          
+          - Toan, Founder at www.recruitery.co
+        </textarea>
       </div>
     </div>
     <hr>
@@ -97,10 +108,7 @@
       <textarea id="inputContentLib"></textarea>
     </div>
     <hr>
-    <button
-      class="btn"
-      id="saveBtn"
-    >save</button>
+    <button class="btn" id="saveBtn">save</button>
   </div>
   <script src="popup.js"></script>
 </body>
