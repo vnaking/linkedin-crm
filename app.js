@@ -268,17 +268,18 @@ window.onload = function () {
   /************************************
    ************ Bubble chat ***********
    ************************************/
-  
+
   const fullNameSelector = 'artdeco-entity-lockup-title';
 
   document.arrive(bubbleChatWindow, function () {
     console.log('arrive: ', bubbleChatWindow);
     // const acceptMsgComposeSendBtnEl = this.querySelector('.msg-form__send-button');
-    let fullName = this.querySelector(
+    let fullNameEl = this.querySelector(
       fullNameSelector
-    ).innerText;
-    if (!fullName) return;
-    if (fullName === 'New message') {
+    );
+    if (fullNameEl) {
+      fullName = fullNameEl.innerText
+    } else {
       fullName = this.querySelector(
         '.msg-connections-typeahead__added-recipients'
       ).innerText;
@@ -299,6 +300,10 @@ window.onload = function () {
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
+        if(!inputWelcomeValue) {
+          alert('Template content not found!');
+          return;
+        }
         paragraph.innerHTML = inputWelcomeValue.replace(
           /(?:\r\n|\r|\n)/g,
           '<br>'
@@ -317,6 +322,10 @@ window.onload = function () {
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
+        if(!inputWelcomeValue) {
+          alert('Template content not found!');
+          return;
+        }
         paragraph.innerHTML = inputWelcomeValue.replace(
           /(?:\r\n|\r|\n)/g,
           '<br>'
@@ -335,6 +344,10 @@ window.onload = function () {
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
+        if(!inputWelcomeValue) {
+          alert('Template content not found!');
+          return;
+        }
         paragraph.innerHTML = inputWelcomeValue.replace(
           /(?:\r\n|\r|\n)/g,
           '<br>'
@@ -353,6 +366,10 @@ window.onload = function () {
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
+        if(!inputWelcomeValue) {
+          alert('Template content not found!');
+          return;
+        }
         paragraph.innerHTML = inputWelcomeValue.replace(
           /(?:\r\n|\r|\n)/g,
           '<br>'
@@ -371,6 +388,10 @@ window.onload = function () {
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
+        if(!inputWelcomeValue) {
+          alert('Template content not found!');
+          return;
+        }
         paragraph.innerHTML = inputWelcomeValue.replace(
           /(?:\r\n|\r|\n)/g,
           '<br>'
