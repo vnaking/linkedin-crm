@@ -36,6 +36,7 @@ window.onload = function () {
   let btnCreateAcceptContentEn;
 
   const copyContent = function (value) {
+    console.log('start copyContent');
     var el = document.createElement('textarea');
     el.value = value;
     el.setAttribute('readonly', '');
@@ -49,7 +50,49 @@ window.onload = function () {
     document.execCommand('copy');
     document.body.removeChild(el);
   };
+  const correctVietnamName = function (name) {
+    console.log('start correctVietnamName');
+    let temp = name;
+    temp = temp.toLowerCase();
+    temp = temp.replace('huon', 'hươn');
+    temp = temp.replace('cuon', 'cườn');
+    temp = temp.replace('uynh', 'uỳnh');
+    temp = temp.replace('uye', 'uyê');
+    temp = temp.replace('ieu', 'iếu');
+    temp = temp.replace('phuc', 'phúc');
+    temp = temp.replace('iet', 'iệt');
+    temp = temp.replace('hao', 'hảo');
+    temp = temp.replace('uoc', 'ước');
+    switch (temp) {
+      case 'ha':
+        temp = 'hà';
+        break;
+      case 'hao':
+        temp = 'hảo';
+        break;
+      case 'son':
+        temp = 'sơn';
+        break;
+      case 'huyên':
+        temp = 'huyền';
+        break;
+      case 'hien':
+        temp = 'hiền';
+        break;
+      case 'duc':
+        temp = 'đức';
+        break;
+      case 'hang':
+        temp = 'hằng';
+        break;
+      case 'tai':
+        temp = 'tài';
+        break;
+    }
+    return temp.charAt(0).toUpperCase() + temp.slice(1);
+  }
   const splittedName = function (fullName) {
+    console.log('start splittedName');
     let fullNameArr, firstName, lastName;
     let temp = {
       firstName: '',
@@ -61,11 +104,12 @@ window.onload = function () {
     fullNameArr = fullName.trim().split(' ');
     firstName = fullNameArr[0];
     lastName = fullNameArr[fullNameArr.length - 1];
-    temp.firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
-    temp.lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+    temp.firstName = correctVietnamName(firstName);
+    temp.lastName = correctVietnamName(lastName);
     return temp;
   };
   const generateBtnCreateAcceptContent = function (btnText, parent) {
+    console.log('start generateBtnCreateAcceptContent');
     var btn = document.createElement('a');
     btn.classList = 'msg-form__send-button button-primary-small rr-btn-xs';
     btn.innerText = btnText;
@@ -83,6 +127,7 @@ window.onload = function () {
     isMr,
     isFirstNameInTheEnd
   ) {
+    console.log('start generateAcceptContent');
     if (!name) return;
     let firstName = name.firstName;
     let lastName = name.lastName;
@@ -300,7 +345,7 @@ window.onload = function () {
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
-        if(!inputWelcomeValue) {
+        if (!inputWelcomeValue) {
           alert('Template content not found!');
           return;
         }
@@ -322,7 +367,7 @@ window.onload = function () {
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
-        if(!inputWelcomeValue) {
+        if (!inputWelcomeValue) {
           alert('Template content not found!');
           return;
         }
@@ -344,7 +389,7 @@ window.onload = function () {
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
-        if(!inputWelcomeValue) {
+        if (!inputWelcomeValue) {
           alert('Template content not found!');
           return;
         }
@@ -366,7 +411,7 @@ window.onload = function () {
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
-        if(!inputWelcomeValue) {
+        if (!inputWelcomeValue) {
           alert('Template content not found!');
           return;
         }
@@ -388,7 +433,7 @@ window.onload = function () {
       // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
-        if(!inputWelcomeValue) {
+        if (!inputWelcomeValue) {
           alert('Template content not found!');
           return;
         }
