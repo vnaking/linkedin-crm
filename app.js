@@ -88,6 +88,18 @@ window.onload = function () {
       case 'tai':
         temp = 'tài';
         break;
+      case 'duong':
+        temp = 'dương';
+        break;
+      case 'thinh':
+        temp = 'thịnh';
+        break;
+      case 'chau':
+        temp = 'châu';
+        break;
+      case 'yen':
+        temp = 'yến';
+        break;
     }
     return temp.charAt(0).toUpperCase() + temp.slice(1);
   }
