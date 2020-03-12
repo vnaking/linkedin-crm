@@ -1,5 +1,9 @@
 .button-primary-small {
   margin-right: 2px;
+  cursor: pointer;
+}
+.msg-form__placeholder {
+  display: none !important;
 }
 
 .msg-form--overlay .msg-form__footer {
@@ -9,6 +13,7 @@
 
 .rr-btn-xs {
   zoom: 0.8;
+  cursor: pointer;
 }
 
 .pv-s-profile-actions--connect span {
