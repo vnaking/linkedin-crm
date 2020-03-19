@@ -61,14 +61,26 @@ window.onload = function () {
     temp = temp.replace('ieu', 'iếu');
     temp = temp.replace('phuc', 'phúc');
     temp = temp.replace('iet', 'iệt');
+    temp = temp.replace('iep', 'iệp');
     temp = temp.replace('hao', 'hảo');
     temp = temp.replace('uoc', 'ước');
+    temp = temp.replace('uan', 'uân');
+    temp = temp.replace('oan', 'oàn');
     switch (temp) {
+      case 'duc':
+        temp = 'đức';
+        break;
+      case 'dang':
+        temp = 'đăng';
+        break;
       case 'ha':
         temp = 'hà';
         break;
       case 'hao':
         temp = 'hảo';
+        break;
+      case 'hoan':
+        temp = 'Hoàn';
         break;
       case 'son':
         temp = 'sơn';
@@ -79,17 +91,32 @@ window.onload = function () {
       case 'hien':
         temp = 'hiền';
         break;
-      case 'duc':
-        temp = 'đức';
-        break;
       case 'hang':
         temp = 'hằng';
+        break;
+      case 'hanh':
+        temp = 'hạnh';
+        break;
+      case 'van':
+        temp = 'vân';
         break;
       case 'tai':
         temp = 'tài';
         break;
+      case 'tuan':
+        temp = 'tuấn';
+        break;
+      case 'tung':
+        temp = 'tùng';
+        break;
+      case 'thang':
+        temp = 'thắng';
+        break;
       case 'duong':
         temp = 'dương';
+        break;
+      case 'dong':
+        temp = 'đông';
         break;
       case 'thinh':
         temp = 'thịnh';
@@ -99,6 +126,21 @@ window.onload = function () {
         break;
       case 'yen':
         temp = 'yến';
+        break;
+      case 'ngoc':
+        temp = 'ngọc';
+        break;
+      case 'ngan':
+        temp = 'ngân';
+        break;
+      case 'loc':
+        temp = 'lộc';
+        break;
+      case 'lien':
+        temp = 'liên';
+        break;
+      case 'phu':
+        temp = 'phú';
         break;
     }
     return temp.charAt(0).toUpperCase() + temp.slice(1);
@@ -185,14 +227,13 @@ window.onload = function () {
       actionParent
     );
     btnCreateAcceptContentVi.addEventListener('click', function () {
+      console.log('generateAcceptContent ' + name + ' vi');
       generateAcceptContent(name, 'vi', false, false);
-      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         if (!acceptMsgComposeInputEl) {
           return;
         }
         acceptMsgComposeInputEl.value = inputWelcomeValue;
-        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
@@ -201,14 +242,13 @@ window.onload = function () {
       actionParent
     );
     btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
+      console.log('generateAcceptContent ' + name + ' vi');
       generateAcceptContent(name, 'vi', false, true);
-      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         if (!acceptMsgComposeInputEl) {
           return;
         }
         acceptMsgComposeInputEl.value = inputWelcomeValue;
-        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
@@ -217,14 +257,13 @@ window.onload = function () {
       actionParent
     );
     btnCreateAcceptContentViMr.addEventListener('click', function () {
+      console.log('generateAcceptContent ' + name + ' vi');
       generateAcceptContent(name, 'vi', true, false);
-      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         if (!acceptMsgComposeInputEl) {
           return;
         }
         acceptMsgComposeInputEl.value = inputWelcomeValue;
-        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
@@ -233,14 +272,13 @@ window.onload = function () {
       actionParent
     );
     btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
+      console.log('generateAcceptContent ' + name + ' vi');
       generateAcceptContent(name, 'vi', true, true);
-      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         if (!acceptMsgComposeInputEl) {
           return;
         }
         acceptMsgComposeInputEl.value = inputWelcomeValue;
-        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
@@ -249,14 +287,13 @@ window.onload = function () {
       actionParent
     );
     btnCreateAcceptContentEn.addEventListener('click', function () {
+      console.log('generateAcceptContent ' + name + ' en');
       generateAcceptContent(name, 'en', false, false);
-      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         if (!acceptMsgComposeInputEl) {
           return;
         }
         acceptMsgComposeInputEl.value = inputWelcomeValue;
-        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
   });
@@ -353,20 +390,20 @@ window.onload = function () {
       actionParent
     );
     btnCreateAcceptContentVi.addEventListener('click', function () {
+      console.log('generateAcceptContent ' + name + ' vi');
       generateAcceptContent(name, 'vi', false, false);
-      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
         if (!inputWelcomeValue) {
           alert('Template content not found!');
           return;
         }
+        acceptMsgComposeInputEl.innerHTML = '';
         paragraph.innerHTML = inputWelcomeValue.replace(
           /(?:\r\n|\r|\n)/g,
           '<br>'
         );
         acceptMsgComposeInputEl.appendChild(paragraph);
-        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
@@ -375,20 +412,20 @@ window.onload = function () {
       actionParent
     );
     btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
+      console.log('generateAcceptContent ' + name + ' vi');
       generateAcceptContent(name, 'vi', false, true);
-      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
         if (!inputWelcomeValue) {
           alert('Template content not found!');
           return;
         }
+        acceptMsgComposeInputEl.innerHTML = '';
         paragraph.innerHTML = inputWelcomeValue.replace(
           /(?:\r\n|\r|\n)/g,
           '<br>'
         );
         acceptMsgComposeInputEl.appendChild(paragraph);
-        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
@@ -397,20 +434,20 @@ window.onload = function () {
       actionParent
     );
     btnCreateAcceptContentViMr.addEventListener('click', function () {
+      console.log('generateAcceptContent ' + name + ' vi');
       generateAcceptContent(name, 'vi', true, false);
-      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
         if (!inputWelcomeValue) {
           alert('Template content not found!');
           return;
         }
+        acceptMsgComposeInputEl.innerHTML = '';
         paragraph.innerHTML = inputWelcomeValue.replace(
           /(?:\r\n|\r|\n)/g,
           '<br>'
         );
         acceptMsgComposeInputEl.appendChild(paragraph);
-        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
@@ -419,20 +456,20 @@ window.onload = function () {
       actionParent
     );
     btnCreateAcceptContentViFirstnameEnd.addEventListener('click', function () {
+      console.log('generateAcceptContent ' + name + ' vi');
       generateAcceptContent(name, 'vi', true, true);
-      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
         if (!inputWelcomeValue) {
           alert('Template content not found!');
           return;
         }
+        acceptMsgComposeInputEl.innerHTML = '';
         paragraph.innerHTML = inputWelcomeValue.replace(
           /(?:\r\n|\r|\n)/g,
           '<br>'
         );
         acceptMsgComposeInputEl.appendChild(paragraph);
-        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
 
@@ -441,20 +478,20 @@ window.onload = function () {
       actionParent
     );
     btnCreateAcceptContentEn.addEventListener('click', function () {
+      console.log('generateAcceptContent ' + name + ' en');
       generateAcceptContent(name, 'en', false, false);
-      // acceptMsgComposeSendBtnEl.disabled = true;
       setTimeout(function () {
         paragraph = document.createElement('p');
         if (!inputWelcomeValue) {
           alert('Template content not found!');
           return;
         }
+        acceptMsgComposeInputEl.innerHTML = '';
         paragraph.innerHTML = inputWelcomeValue.replace(
           /(?:\r\n|\r|\n)/g,
           '<br>'
         );
         acceptMsgComposeInputEl.appendChild(paragraph);
-        // acceptMsgComposeSendBtnEl.disabled = false;
       }, viewDelay);
     });
   });
