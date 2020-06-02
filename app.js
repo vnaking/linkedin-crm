@@ -103,6 +103,9 @@ window.onload = function () {
       case 'tai':
         temp = 'tài';
         break;
+        case 'tien':
+          temp = 'tiên';
+          break;
       case 'tuan':
         temp = 'tuấn';
         break;
@@ -136,6 +139,9 @@ window.onload = function () {
       case 'loc':
         temp = 'lộc';
         break;
+        case 'le':
+          temp = 'lê';
+          break;
       case 'lien':
         temp = 'liên';
         break;
@@ -203,6 +209,8 @@ window.onload = function () {
         inputWelcomeValue = inputWelcomeTemplate[lang]
           .replace(/{{firstName}}/g, 'anh ' + firstName)
           .replace(/bạn/g, 'anh')
+          .replace(/mình/g, 'em')
+          .replace(/Mình/g, 'Em')
           .replace(/{{lastName}}/g, lastName);
       } else {
         inputWelcomeValue = inputWelcomeTemplate[lang]
@@ -375,7 +383,7 @@ window.onload = function () {
       fullName = fullNameEl.innerText
     } else {
       fullName = this.querySelector(
-        '.msg-connections-typeahead__added-recipients'
+        '.msg-connections-typeahead__added-recipients .artdeco-pill__text'
       ).innerText;
     }
     let acceptMsgComposeInputEl = this.querySelector(

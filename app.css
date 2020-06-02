@@ -19,3 +19,11 @@
 .pv-s-profile-actions--connect span {
   pointer-events: none;
 }
+
+.msg-form__footer {
+  display: table !important;
+}
+
+.msg-form__footer .msg-form__send-button {
+  margin-right: 15px;
+}
