@@ -54,19 +54,10 @@ window.onload = function () {
     console.log('start correctVietnamName');
     let temp = name;
     temp = temp.toLowerCase();
-    temp = temp.replace('huon', 'hươn');
-    temp = temp.replace('cuon', 'cườn');
-    temp = temp.replace('uynh', 'uỳnh');
-    temp = temp.replace('uye', 'uyê');
-    temp = temp.replace('ieu', 'iếu');
-    temp = temp.replace('phuc', 'phúc');
-    temp = temp.replace('iet', 'iệt');
-    temp = temp.replace('iep', 'iệp');
-    temp = temp.replace('hao', 'hảo');
-    temp = temp.replace('uoc', 'ước');
-    temp = temp.replace('uan', 'uân');
-    temp = temp.replace('oan', 'oàn');
     switch (temp) {
+      case 'binh':
+        temp = 'bình';
+        break;
       case 'duc':
         temp = 'đức';
         break;
@@ -78,6 +69,9 @@ window.onload = function () {
         break;
       case 'hao':
         temp = 'hảo';
+        break;
+      case 'hong':
+        temp = 'hồng';
         break;
       case 'hoan':
         temp = 'Hoàn';
@@ -100,12 +94,27 @@ window.onload = function () {
       case 'van':
         temp = 'vân';
         break;
+      case 'viet':
+        temp = 'việt';
+        break;
       case 'tai':
         temp = 'tài';
         break;
-        case 'tien':
-          temp = 'tiên';
-          break;
+      case 'tan':
+        temp = 'tân';
+        break;
+      case 'tram':
+        temp = 'trâm';
+        break;
+      case 'tran':
+        temp = 'trân';
+        break;
+      case 'tri':
+        temp = 'trí';
+        break;
+      case 'tien':
+        temp = 'tiên';
+        break;
       case 'tuan':
         temp = 'tuấn';
         break;
@@ -115,14 +124,38 @@ window.onload = function () {
       case 'thang':
         temp = 'thắng';
         break;
-      case 'duong':
-        temp = 'dương';
+      case 'thao':
+        temp = 'thảo';
         break;
-      case 'dong':
-        temp = 'đông';
+      case 'thai':
+        temp = 'thái';
+        break;
+      case 'thach':
+        temp = 'thạch';
         break;
       case 'thinh':
         temp = 'thịnh';
+        break;
+      case 'thuat':
+        temp = 'thuật';
+        break;
+      case 'thuy':
+        temp = 'thuỷ';
+        break;
+      case 'tu':
+        temp = 'tú';
+        break;
+      case 'tuyen':
+        temp = 'tuyền';
+        break;
+      case 'duong':
+        temp = 'dương';
+        break;
+      case 'diem':
+        temp = 'diễm';
+        break;
+      case 'dong':
+        temp = 'đông';
         break;
       case 'chau':
         temp = 'châu';
@@ -136,18 +169,40 @@ window.onload = function () {
       case 'ngan':
         temp = 'ngân';
         break;
+      case 'nguyen':
+        temp = 'nguyên';
+        break;
+      case 'nhut':
+        temp = 'Nhựt';
+        break;
       case 'loc':
         temp = 'lộc';
         break;
-        case 'le':
-          temp = 'lê';
-          break;
+      case 'le':
+        temp = 'lê';
+        break;
       case 'lien':
         temp = 'liên';
         break;
       case 'phu':
         temp = 'phú';
         break;
+      case 'phung':
+        temp = 'phụng';
+        break;
+
+        temp = temp.replace('huon', 'hươn');
+        temp = temp.replace('cuon', 'cườn');
+        temp = temp.replace('uynh', 'uỳnh');
+        temp = temp.replace('uye', 'uyê');
+        temp = temp.replace('ieu', 'iếu');
+        temp = temp.replace('phuc', 'phúc');
+        temp = temp.replace('iet', 'iệt');
+        temp = temp.replace('iep', 'iệp');
+        temp = temp.replace('hao', 'hảo');
+        temp = temp.replace('uoc', 'ước');
+        temp = temp.replace('uan', 'uân');
+        temp = temp.replace('oan', 'oàn');
     }
     return temp.charAt(0).toUpperCase() + temp.slice(1);
   }
