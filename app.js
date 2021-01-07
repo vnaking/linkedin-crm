@@ -9,16 +9,13 @@ window.onload = function () {
   const acceptMsgComposeInput = '.msg-messaging-form__form textarea';
   const acceptMsgComposeSendBtn = '.msg-messaging-form__send-button';
   const acceptMsgComposePtn = '.msg-compose-modal__content';
+  const ptnModalConnect = '.artdeco-modal.send-invite';
   const acceptMsgComposeActions = '.msg-messaging-form__left-actions';
   const acceptMsgComposeFullName = '.msg-connections-typeahead__recipient';
-
-  const ptnButtonConnect = 'button[aria-label^="Connect with"]';
-  const ptnButtonConnectSingel = '.pv-s-profile-actions--connect';
+  const ptnButtonConnect = '.entity-result__actions button';
   const ptnInviteAddNote = 'button[aria-label="Add a note"]';
   const ptnCustomMessage = '#custom-message';
-
   const bubbleChatWindow = '.msg-overlay-conversation-bubble';
-
   let inputWelcomeValue;
   let inputWelcomeTemplate = {
     en: '',
@@ -66,18 +63,18 @@ window.onload = function () {
       case 'dao':
         temp = 'đào';
         break;
-        case 'dat':
-          temp = 'đạt';
-          break;
+      case 'dat':
+        temp = 'đạt';
+        break;
       case 'dang':
         temp = 'đăng';
         break;
       case 'ha':
         temp = 'hà';
         break;
-        case 'hai':
-          temp = 'hải';
-          break;
+      case 'hai':
+        temp = 'hải';
+        break;
       case 'hao':
         temp = 'hảo';
         break;
@@ -96,9 +93,9 @@ window.onload = function () {
       case 'huan':
         temp = 'huân';
         break;
-        case 'hung':
-          temp = 'hùng';
-          break;
+      case 'hung':
+        temp = 'hùng';
+        break;
       case 'huong':
         temp = 'hương';
         break;
@@ -150,9 +147,9 @@ window.onload = function () {
       case 'truc':
         temp = 'trúc';
         break;
-        case 'trong':
-          temp = 'trọng';
-          break;
+      case 'trong':
+        temp = 'trọng';
+        break;
       case 'tien':
         temp = 'tiên';
         break;
@@ -192,9 +189,9 @@ window.onload = function () {
       case 'tuyen':
         temp = 'tuyền';
         break;
-        case 'tuyet':
-          temp = 'tuyết';
-          break;
+      case 'tuyet':
+        temp = 'tuyết';
+        break;
       case 'duong':
         temp = 'dương';
         break;
@@ -207,9 +204,9 @@ window.onload = function () {
       case 'cam':
         temp = 'cẩm';
         break;
-        case 'chau':
-          temp = 'châu';
-          break;
+      case 'chau':
+        temp = 'châu';
+        break;
       case 'cong':
         temp = 'công';
         break;
@@ -243,18 +240,18 @@ window.onload = function () {
       case 'kieu':
         temp = 'kiều';
         break;
-        case 'kien':
-          temp = 'kiên';
-          break;
+      case 'kien':
+        temp = 'kiên';
+        break;
       case 'lai':
         temp = 'lài';
         break;
       case 'loc':
         temp = 'lộc';
         break;
-        case 'luong':
-          temp = 'lượng';
-          break;
+      case 'luong':
+        temp = 'lượng';
+        break;
       case 'le':
         temp = 'lê';
         break;
@@ -446,20 +443,9 @@ window.onload = function () {
   /************************************
    ********** Invitations msg *********
    ************************************/
-  const generateInvitationContent = function (event) {
-    let originalNameString = event.target.getAttribute('aria-label');
-    if (!originalNameString || !originalNameString.length) {
-      const lastSpan = event.target.querySelector('span:last-child');
-      if (lastSpan) {
-        originalNameString = lastSpan.innerText;
-      }
-    }
-    let fullName = originalNameString.match(/(?<=Connect with\s+).*?(?=\.)/gs);
-    if (fullName && fullName.length) {
-      fullName = fullName[0];
-    } else {
-      fullName = originalNameString.replace('Connect with ', '');
-    }
+  document.arrive(ptnModalConnect, function () {
+    console.log('ptnModalConnect arrived');
+    let fullName = this.querySelector('.artdeco-modal__content strong').innerText;
     const name = splittedName(fullName);
     setTimeout(function () {
       // click add note
@@ -484,24 +470,11 @@ window.onload = function () {
           const customMessageEl = document.querySelector(ptnCustomMessage);
           if (customMessageEl) {
             customMessageEl.value = inputInvitationValue;
+            this.click();
           }
         });
       }, viewDelay);
     }, viewDelay);
-  };
-  const btnsInvite = document.querySelectorAll(ptnButtonConnect);
-  const btnInviteSingle = document.querySelector(ptnButtonConnectSingel);
-  for (i = 0, len = btnsInvite.length; i < len; i++) {
-    btnsInvite[i].addEventListener('click', generateInvitationContent);
-  }
-  if (btnInviteSingle) {
-    btnInviteSingle.addEventListener('click', generateInvitationContent);
-  }
-  document.arrive(ptnButtonConnect, function () {
-    this.addEventListener('click', generateInvitationContent);
-  });
-  document.arrive(ptnButtonConnectSingel, function () {
-    this.addEventListener('click', generateInvitationContent);
   });
 
   /************************************
