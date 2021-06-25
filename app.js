@@ -72,6 +72,9 @@ window.onload = function () {
       case 'ha':
         temp = 'hà';
         break;
+      case 'hang':
+        temp = 'hằng';
+        break;
       case 'hai':
         temp = 'hải';
         break;
@@ -87,6 +90,9 @@ window.onload = function () {
       case 'hoang':
         temp = 'hoàng';
         break;
+      case 'hoan':
+        temp = 'hoàn';
+        break;
       case 'son':
         temp = 'sơn';
         break;
@@ -100,6 +106,7 @@ window.onload = function () {
         temp = 'hương';
         break;
       case 'huyên':
+      case 'huyen':
         temp = 'huyền';
         break;
       case 'hien':
@@ -114,6 +121,9 @@ window.onload = function () {
       case 'hanh':
         temp = 'hạnh';
         break;
+      case 'hau':
+        temp = 'hậu';
+        break;
       case 'van':
         temp = 'vân';
         break;
@@ -125,6 +135,12 @@ window.onload = function () {
         break;
       case 'tai':
         temp = 'tài';
+        break;
+      case 'tam':
+        temp = 'tâm';
+        break;
+      case 'ut':
+        temp = 'út';
         break;
       case 'tan':
         temp = 'tân';
@@ -162,6 +178,9 @@ window.onload = function () {
       case 'thang':
         temp = 'thắng';
         break;
+      case 'tham':
+        temp = 'thắm';
+        break;
       case 'thao':
         temp = 'thảo';
         break;
@@ -170,6 +189,9 @@ window.onload = function () {
         break;
       case 'thach':
         temp = 'thạch';
+        break;
+      case 'thong':
+        temp = 'thông';
         break;
       case 'thinh':
         temp = 'thịnh';
@@ -182,6 +204,9 @@ window.onload = function () {
         break;
       case 'thuy':
         temp = 'thuỷ';
+        break;
+      case 'thu':
+        temp = 'thư';
         break;
       case 'tu':
         temp = 'tú';
@@ -200,6 +225,9 @@ window.onload = function () {
         break;
       case 'dong':
         temp = 'đông';
+        break;
+      case 'doan':
+        temp = 'đoan';
         break;
       case 'cam':
         temp = 'cẩm';
@@ -267,7 +295,9 @@ window.onload = function () {
       case 'phung':
         temp = 'phụng';
         break;
-
+      case 'quy':
+        temp = 'quý';
+        break;
     }
 
     temp = temp.replace('huon', 'hươn');
@@ -281,7 +311,6 @@ window.onload = function () {
     temp = temp.replace('hao', 'hảo');
     temp = temp.replace('uoc', 'ước');
     temp = temp.replace('uan', 'uân');
-    temp = temp.replace('oan', 'oàn');
 
     return temp.charAt(0).toUpperCase() + temp.slice(1);
   }
